@@ -1,0 +1,90 @@
+# xóa bỏ các container, images cũ để phục vụ cài lại
+	docker rm -f sysreptor-app sysreptor-db && docker volume rm -f sysreptor-app-data sysreptor-db-data
+	
+#Thông tin truy cập sau khi cài xong
+	You can now login at http://127.0.0.1:8989
+	Username: admin
+	Password: mK222@dt6
+
+# Import CPTS report template và project mẫu
+	curl -s "https://docs.sysreptor.com/assets/htb-designs.tar.gz" | sudo docker compose exec --no-TTY app python3 manage.py importdemodata --type=design
+	curl -s "https://docs.sysreptor.com/assets/htb-demo-projects.tar.gz" | sudo docker compose exec --no-TTY app python3 manage.py importdemodata --type=project
+
+# import metadata
+	# Projects
+	url="https://docs.sysreptor.com/assets/demo-projects.tar.gz"
+	curl -s "$url" | docker compose exec --no-TTY app python3 manage.py importdemodata --type=project --add-member="$username"
+
+	# Designs
+	url="https://docs.sysreptor.com/assets/demo-designs.tar.gz"
+	curl -s "$url" | docker compose exec --no-TTY app python3 manage.py importdemodata --type=design
+
+	# Finding templates
+	url="https://docs.sysreptor.com/assets/demo-templates.tar.gz"
+	curl -s "$url" | docker compose exec --no-TTY app python3 manage.py importdemodata --type=template
+#Mục lục: Để cho các tiêu đề vào mục lục thì các tiêu đề đó phải nằm trong class in-toc"
+	class="in-toc" để cho tiêu đề vào bảng mục lục
+
+#background theo mức độ lỗi.
+	class="risk-bg-critical" #critical
+	class="risk-bg-high" #high
+	class="risk-bg-medium" #medium
+	class="risk-bg-low" #low
+
+#Bảng
+	<table>
+		<tr>
+			<th></th> # Tiêu đề cột
+		</tr>
+		<tr>
+			<td></td> # Giá trị trừng cột
+		</tr> 
+	</table>
+
+# Vòng lặp for
+	 <tr v-for="i in 6" :key="i">
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	 </tr>
+		
+# Ngắt trang
+	<pagebreak />
+
+/assets/name/footer-logo.png
+
+# Các biến trong sysrepoter
+	report.
+	findings.
+
+{{ lead_pentester.name }}
+{{ report.customer_name }}
+{{ finding.cvss.score }}
+{{ finding.cvss.vector }}
+{{ finding_stats.count_critical }}
+
+<markdown v-if="report.executive_summary" :text="report.executive_summary" />
+
+POC
+		<h3>Overview</h3>
+        <markdown :text="finding.summary" />
+
+        <h3>Details</h3>
+        <markdown :text="finding.description" />
+
+        <h3>Recommendation</h3>
+        <markdown :text="finding.recommendation" />
+		
+
+<span v-if="!finding.cvss.vector || finding.cvss.vector === 'n/a'">N/A</span>
+<span v-else>{{ finding.cvss.vector }}</span>
+
+#Token API
+Authorization: Bearer sysreptor_Y2NlOTA3OWQtNGMzNS00YWIwLThmMzMtNmU0OThkZDEzN2U3OjVlNzZlMzA5NzM4NDIyMTQxNjY2Y2E1YTlkZDQwNzMzZDkwNWJhNzU3Mjk1YjljZGU3NzQ0NmJiZmIxZjJmM2E=
+
+# CLI: command
+- list all teamples findings: reptor template --list 
+- export all templates findings: reptor template --export tar.gz

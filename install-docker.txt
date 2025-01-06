@@ -1,0 +1,20 @@
+1. Xóa bỏ các thư viện cũ
+	for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+2. Cài đặt và start docker.
+	sudo apt update
+	sudo apt install -y docker.io
+	sudo systemctl enable docker --now
+3. Thêm quyền chạy docker cho user hiện tại mà k cần root.
+	sudo usermod -aG docker $USER
+4. Cài đặt docker-re:
+	echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" | sudo tee /etc/apt/sources.list.d/docker.list 
+5. import gpg key:
+	curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+6. Update gói mới
+	sudo apt update
+7. Cài đặt docker compose:
+	sudo apt install -y docker-ce docker-ce-cli containerd.io
+9. Cài đặt các thư viện của sysreptor.
+	sudo apt install -y sed curl openssl uuid-runtime coreutils
+10. Download và cài đặt sysreptor:
+	bash <(curl -s https://docs.sysreptor.com/install.sh)
