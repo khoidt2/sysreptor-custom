@@ -1,6 +1,17 @@
+You can now login at http://127.0.0.1:6969
+Username: reptor
+Password: NivrJ/8FM7q2hkl+B/9vwuit4gM
+
+# Xóa bỏ toàn bộ các container images trên docker
+	sudo docker rm -vf $(docker ps -aq)
+	sudo docker rmi -f $(docker images -aq)
 # xóa bỏ các container, images cũ để phục vụ cài lại
 	docker rm -f sysreptor-app sysreptor-db && docker volume rm -f sysreptor-app-data sysreptor-db-data
-	
+
+#Cài đặt sysreptor:
+	wget https://
+	chmod +x install.sh
+	./install.sh
 #Thông tin truy cập sau khi cài xong
 	You can now login at http://127.0.0.1:8989
 	Username: admin
@@ -88,3 +99,9 @@ Authorization: Bearer sysreptor_Y2NlOTA3OWQtNGMzNS00YWIwLThmMzMtNmU0OThkZDEzN2U3
 # CLI: command
 - list all teamples findings: reptor template --list 
 - export all templates findings: reptor template --export tar.gz
+
+# Xuất và import Template/Design
+ - B1: Xuất Design trước, sau đó import Design lên hệ thống mới.
+ - B2: Xuất Template, sau đó import từng template lên hệ thống mới.
+ - B3: Vào một Template cụ thể. Ở cột bên trái "Show fileds of". Chọn "LBP Report Template"
+ - B4: Tích để disable các filed thừa không cần thiết, không muốn hiện trong report.
